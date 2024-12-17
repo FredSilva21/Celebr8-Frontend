@@ -1,7 +1,8 @@
-import {url} from './users';
+import { LoginProps, TokenProps } from '@/types/user';
+const url="http://192.168.1.164:3000"
 
 //Login
-export async function login(fields: {email:string,password:string}) {
+export async function login(fields: LoginProps){
     try {
         const response = await fetch(`${url}/login`,{
             method:'POST',
@@ -19,7 +20,7 @@ export async function login(fields: {email:string,password:string}) {
 }
 
 //Register
-export async function register(fields: {email:string,password:string}) {
+export async function register(fields: {email:string,password:string, name:string}) {
     try {
         const response = await fetch(`${url}/register`,{
             method:'POST',

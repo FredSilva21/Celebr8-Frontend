@@ -9,7 +9,7 @@ export default function AuthLayout() {
         }} />
         <Stack.Screen name="register" options={{
           title: 'Register',
-          headerTitleAlign: 'center',
+          headerShown: false,
         }} />
       </Stack>
   );

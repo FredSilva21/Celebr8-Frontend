@@ -4,7 +4,7 @@ export const TypeScale = {
         fontSize: 32,
     },
     h1: {
-        fontFamily: 'Exo2-Bold',
+        fontFamily: 'Exo2-ExtraBold',
         fontSize: 28,
     },
     h2Bold: {

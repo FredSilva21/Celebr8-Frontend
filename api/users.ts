@@ -1,9 +1,10 @@
-import { UserFields } from '../types/user';
-export const url='http://localhost:3000/users';
+import { User } from '../types/user';
+export const url='http://192.168.1.164:3000/users';
 
 // Get User by Id
 export async function getUser(id:number){
   try {
+    console.log(`${url}/${id}`)
     const response = await fetch(`${url}/${id}`);
     const data = await response.json();
     const user=data.result
@@ -13,7 +14,7 @@ export async function getUser(id:number){
   }
 }
 
-export async function editUser(token: string, fields: UserFields) {
+export async function editUser(token: string, fields: User) {
   try {
     const response = await fetch(`${url}/${fields.id}`,{
         method:'PUT',

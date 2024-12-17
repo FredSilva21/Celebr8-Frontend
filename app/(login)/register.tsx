@@ -1,11 +1,20 @@
 import React from 'react';
-import { View,Text } from "react-native";
+import { SafeAreaView,View,Text,StyleSheet } from "react-native";
 import { Link } from 'expo-router';
+import { RegisterForm } from '@/components/auth/AuthForms';
 
 export default function RegisterPage() {
     return (
-        <View>
-            <Text>Register Page</Text>
-        </View> 
+        <SafeAreaView style={styles.container}>
+            <RegisterForm />  
+        </SafeAreaView> 
         );
     }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
