@@ -1,7 +1,7 @@
 import { login } from "@/api/auth";
 import { useState } from "react";
 import { LoginProps, TokenProps } from "@/types/user";
-import { storeData, clearAllData } from "@/storage/storage";
+import { storeToken } from "@/storage/secureStorage";
 import { useRouter } from "expo-router";
 
 export default function useLogin() {
@@ -19,11 +19,9 @@ export default function useLogin() {
                 setError(response.error);
                 return;
             }
-
-            setToken(response.result);
-            storeData("accessToken", response.result.accessToken);
-            storeData("refreshToken", response.result.refreshToken);
-            storeData("user_id", response.result.user_id);
+            await storeToken("refresh_token",response.result.refreshToken);
+            await storeToken("access_token",response.result.accessToken);
+            await storeToken("user_id",JSON.stringify(response.result.user_id));
             router.push("/event");
         } catch (err) {
             setError("Erro inesperado, tente novamente.");

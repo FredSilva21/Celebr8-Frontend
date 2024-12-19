@@ -15,7 +15,6 @@ export interface User extends RegisterProps {
 }
 
 export interface TokenProps{
-    user_id: number;
     refreshToken: string;
     accessToken: string;
 }
