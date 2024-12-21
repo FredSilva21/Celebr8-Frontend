@@ -1,5 +1,5 @@
 import { LoginProps, TokenProps } from '@/types/user';
-const url="http://192.168.1.70:3000"
+const url="http://192.168.1.164:3000"
 
 //Login
 export async function login(fields: LoginProps){

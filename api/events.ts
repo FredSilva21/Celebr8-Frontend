@@ -3,9 +3,9 @@ import { url } from './users'; //Import backend url
 import { TaskFields, TaskIds } from '../types/task'; //Import Task Interfaces
 
 //Get All Event Tasks
-export async function getAllTask(token: string, fields: TaskIds) {
+export async function getAllEvents(token: string, userId: number) {
     try {
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks`, {
+        const response = await fetch(`${url}/${userId}/events`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

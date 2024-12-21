@@ -1,7 +1,15 @@
 export interface TaskIds {
-    taskId:number,
-    userId:number,
-    eventId:number
+    task_id:number,
+    user_id:number,
+    event_id:number
+}
+
+export interface TaskProps {
+    token:string,
+    fields:{
+        userId:number,
+        eventId:number
+    }
 }
 
 export interface TaskFields extends TaskIds{
@@ -9,5 +17,6 @@ export interface TaskFields extends TaskIds{
     description:string,
     start_date:string,
     end_date:string,
-    priority: "Low" | "Medium" | "High"
+    priority: "Low" | "Medium" | "High",
+    status:boolean
 }

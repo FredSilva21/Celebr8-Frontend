@@ -20,8 +20,7 @@ export default function RootLayout() {
           headerShown: false,
         }} />
         <Stack.Screen name="event" options={{
-          title: 'Event',
-          headerTitleAlign: 'center',
+          headerShown: false,
         }} />
       </Stack>
   );
