@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { TypeScale } from "@/constants/TypeScale";
 
@@ -7,8 +7,7 @@ export const TaskMainStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center',
-        borderRadius: 10,
+        alignItems: 'flex-start',
         backgroundColor: Colors.lightYellow
     },
 
@@ -21,11 +20,22 @@ export const TaskMainStyles = StyleSheet.create({
         backgroundColor: Colors.lightYellow
     },
 
-    textContainer: {
-        flex: 1,
+    topContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: Colors.lightYellow,
+        padding: 20,
+        width: '100%',
+        marginVertical: 10,
+        marginHorizontal: 20,
+    },
+
+    taskContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         padding: 10,
         margin: 10,
         borderRadius: 10,
@@ -33,21 +43,30 @@ export const TaskMainStyles = StyleSheet.create({
     },
 
     text: {
-        fontSize: TypeScale.body1.fontSize,
-        fontFamily: TypeScale.body1.fontFamily,
+        fontSize: TypeScale.h2.fontSize,
+        fontFamily: TypeScale.h2.fontFamily,
     },
 
-    cardContainer:{
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        padding: 10,
-        margin: 10,
-        borderRadius: 10,
-        backgroundColor: Colors.lightYellow
+    floatingButton: {
+        position: 'fixed',
+        bottom: 20,
+        left:0,
+        width: 353,
+        height: 46,
+        backgroundColor: Colors.yellow,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
     },
-    FlatList: {
-        flex: 3,
-    },
+
+    addTaskText: {
+        color: Colors.blue,
+        fontSize: TypeScale.uiElements1.fontSize,
+        fontFamily: TypeScale.uiElements1.fontFamily,
+    }
 });

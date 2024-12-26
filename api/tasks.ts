@@ -1,4 +1,4 @@
-import { TaskFields, TaskIds } from '../types/task'; //Import Task Interfaces
+import { TaskIds, CreateTask } from '../types/task'; //Import Task Interfaces
 import { url } from './users'; //Import backend url
 
 //Get All Event Tasks
@@ -12,6 +12,7 @@ export async function getAllTasks(token: string, fields: { user_id: number, even
             },
         });
         const data = await response.json();
+        console.log("data", data)
         return data.result
     } catch (error) {
         console.log(error)
@@ -19,16 +20,15 @@ export async function getAllTasks(token: string, fields: { user_id: number, even
 }
 
 //Create Task
-export async function createTask(token: string, fields: TaskFields) {
+export async function createTask(token: string, fields: CreateTask ) {
     try {
-        const { task_id, user_id, event_id, ...taskBody } = fields;
-        const response = await fetch(`${url}/users/${fields.user_id}/events/${fields.event_id}/tasks`, {
-            method: 'GET',
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(taskBody)
+            body: JSON.stringify(fields.fields)
         });
         const data = await response.json();
         return data.result
@@ -48,7 +48,6 @@ export async function getTask(token: string, fields: TaskIds) {
             },
         });
         const data = await response.json();
-        console.log("data", data)
         return data.result
     } catch (error) {
         console.log(error)
@@ -58,7 +57,7 @@ export async function getTask(token: string, fields: TaskIds) {
 //Edit Task
 export async function editTask(token: string, fields: TaskIds) {
     try {
-        const response = await fetch(`${url}/users/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +75,7 @@ export async function editTask(token: string, fields: TaskIds) {
 //Delete Task
 export async function deleteTask(token: string, fields: TaskIds) {
     try {
-        const response = await fetch(`${url}/users/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

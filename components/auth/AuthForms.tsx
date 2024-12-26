@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import { AuthStyles } from '@/styles/auth';
-import ButtonComponent from '@/components/Button';
+import ButtonComponent from '@/components/button/Button';
 import useLogin from '@/hooks/Auth/useLogin';
 import { useRouter } from 'expo-router';
 import useRegister from '@/hooks/Auth/useRegister';
 import GradientText from '../gradient/gradientText';
 import ErrorModal from '../notifications/errorComponent';
+import useAuth from '@/hooks/Auth/useAuth';
 
 export function LoginForm() {
     const [email, setEmail] = useState('');

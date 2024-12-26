@@ -17,8 +17,6 @@ export default function useTasks(task_id: number) {
                 event_id: 2150
             };
             if (token) {
-                console.log(token);
-                console.log(fields);
                 const task = await getTask(token, fields);
                 setTask(task);
             }

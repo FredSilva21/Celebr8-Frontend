@@ -23,20 +23,17 @@ export const TaskCardStyles = StyleSheet.create({
         backgroundColor:Colors.greenBlue
     },
     title: {
-        fontSize: TypeScale.h2Bold.fontSize,
-        fontFamily: TypeScale.h2Bold.fontFamily,
-        color: Colors.lightYellow,
-    },
-    description: {
-        fontSize: TypeScale.body2.fontSize,
-        fontFamily: TypeScale.body2.fontFamily,
+        fontSize: TypeScale.body2Bold.fontSize,
+        fontFamily: TypeScale.body2Bold.fontFamily,
+        color: Colors.yellow,
     },
     dueDate: {
-        fontSize: TypeScale.body2.fontSize,
-        fontFamily: TypeScale.body2.fontFamily,
+        fontSize: TypeScale.body3.fontSize,
+        fontFamily: TypeScale.body3.fontFamily,
+        color: Colors.lightYellow,
     },
     status: {
-        fontSize: TypeScale.body2.fontSize,
-        fontFamily: TypeScale.body2.fontFamily,
+        fontSize: TypeScale.body3.fontSize,
+        fontFamily: TypeScale.body3.fontFamily,
     },
 });

@@ -1,21 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { topBarStyles } from '@/styles/topBar';
+import useUser from '@/hooks/User/useUser';
+import NotificationIcon from '@/assets/images/Notification Button.svg';
 
 export default function TopBar() {
+    const user = useUser();
+    console.log("User:", user)
+
+    if (!user) {
+        return (
+            <View style={topBarStyles.container}>
+                <Text>Loading...</Text>
+            </View>
+        )
+    }
+
     return (
         <View style={topBarStyles.container}>
             <View style={topBarStyles.leftContainer}>
-                <View style={topBarStyles.image}>
-                    <Text style={topBarStyles.image}>Image</Text>
-                </View>
+                <NotificationIcon style={topBarStyles.image} />
                 <View style={topBarStyles.text}>
                     <Text style={topBarStyles.title1}>Welcome Back,</Text>
-                    <Text style={topBarStyles.title2}>Username</Text>
+                    <Text style={topBarStyles.title2}>{user.name}</Text>
                 </View>
             </View>
             <View style={topBarStyles.rightContainer}>
-                <Text style={topBarStyles.image}>Notification</Text>
+                <NotificationIcon style={topBarStyles.image} />
             </View>
         </View>
     );

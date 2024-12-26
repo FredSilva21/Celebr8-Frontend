@@ -29,8 +29,6 @@ export const topBarStyles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
-        backgroundColor: Colors.white,
-        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
     },
