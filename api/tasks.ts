@@ -1,10 +1,10 @@
-import { TaskFields, TaskIds } from '../types/task'; //Import Task Interfaces
+import { TaskIds, CreateTask } from '../types/task'; //Import Task Interfaces
 import { url } from './users'; //Import backend url
 
 //Get All Event Tasks
-export async function getAllTask(token: string, fields: TaskIds) {
+export async function getAllTasks(token: string, fields: { user_id: number, event_id: number }) {
     try {
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,6 +12,7 @@ export async function getAllTask(token: string, fields: TaskIds) {
             },
         });
         const data = await response.json();
+        console.log("data", data)
         return data.result
     } catch (error) {
         console.log(error)
@@ -19,16 +20,15 @@ export async function getAllTask(token: string, fields: TaskIds) {
 }
 
 //Create Task
-export async function createTask(token: string, fields: TaskFields) {
+export async function createTask(token: string, fields: CreateTask ) {
     try {
-        const { taskId, userId, eventId, ...taskBody } = fields;
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks`, {
-            method: 'GET',
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(taskBody)
+            body: JSON.stringify(fields.fields)
         });
         const data = await response.json();
         return data.result
@@ -40,7 +40,7 @@ export async function createTask(token: string, fields: TaskFields) {
 //Get Task by ID
 export async function getTask(token: string, fields: TaskIds) {
     try {
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks/${fields.taskId}`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export async function getTask(token: string, fields: TaskIds) {
 //Edit Task
 export async function editTask(token: string, fields: TaskIds) {
     try {
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks/${fields.taskId}`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export async function editTask(token: string, fields: TaskIds) {
 //Delete Task
 export async function deleteTask(token: string, fields: TaskIds) {
     try {
-        const response = await fetch(`${url}/users/${fields.userId}/events/${fields.eventId}/tasks/${fields.taskId}`, {
+        const response = await fetch(`${url}/${fields.user_id}/events/${fields.event_id}/tasks/${fields.task_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

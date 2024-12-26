@@ -38,11 +38,15 @@ export const storeToken = async (key: string, value: string) => {
     }
 };
 
-export const getData = async (key: string): Promise<TokenProps | null> => {
+export const getData = async (key: string) => {
     try {
         const data = await SecureStore.getItemAsync(key);
+        
         if (!data) {
             return null;
+        } 
+        if(typeof data === 'string') {
+            return data;
         }
         return JSON.parse(data);
     } catch (error) {

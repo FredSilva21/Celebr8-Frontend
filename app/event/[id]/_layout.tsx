@@ -1,24 +1,38 @@
 import { Tabs } from "expo-router";
+import CustomTabBar from "@/components/TabNavigation"; // Atualize o caminho se necessário
 
 export default function EventLayout() {
     return (
-        <Tabs>
-            <Tabs.Screen name="tasks" options={{
-                title: 'Tasks',
-                headerTitleAlign: 'center',
-            }} />
-            <Tabs.Screen name="tables" options={{
-                title: 'Tables',
-                headerTitleAlign: 'center',
-            }} />
-            <Tabs.Screen name="costs" options={{
-                title: 'Settings',
-                headerTitleAlign: 'center',
-            }} />
-            <Tabs.Screen name="chat" options={{
-                title: 'Chat',
-                headerTitleAlign: 'center',
-            }} />
+        <Tabs
+            screenOptions={{
+                headerShown: false
+            }}
+            tabBar={(props) => <CustomTabBar {...props} />}
+        >
+            <Tabs.Screen
+                name="tasks"
+                options={{
+                    title: 'Tasks',
+                }}
+            />
+            <Tabs.Screen
+                name="tables"
+                options={{
+                    title: 'Tables',
+                }}
+            />
+            <Tabs.Screen
+                name="costs"
+                options={{
+                    title: 'Settings',
+                }}
+            />
+            <Tabs.Screen
+                name="chat"
+                options={{
+                    title: 'Chat',
+                }}
+            />
         </Tabs>
     );
 }

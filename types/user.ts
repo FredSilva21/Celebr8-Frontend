@@ -18,3 +18,11 @@ export interface TokenProps{
     refreshToken: string;
     accessToken: string;
 }
+
+export interface UserFields {
+    id: number;
+    google_id: string | null;
+    name: string;
+    email: string;
+    password: string;
+}

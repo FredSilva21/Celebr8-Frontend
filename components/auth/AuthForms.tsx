@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { View, TextInput, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import { AuthStyles } from '@/styles/auth';
-import ButtonComponent from '@/components/Button';
+import ButtonComponent from '@/components/button/Button';
 import useLogin from '@/hooks/Auth/useLogin';
 import { useRouter } from 'expo-router';
 import useRegister from '@/hooks/Auth/useRegister';
+import GradientText from '../gradient/gradientText';
+import ErrorModal from '../notifications/errorComponent';
+import useAuth from '@/hooks/Auth/useAuth';
 
 export function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
     const { performLogin, loading, error } = useLogin(); // Hook retorna a função performLogin
     const router = useRouter()
 
@@ -16,8 +20,19 @@ export function LoginForm() {
         performLogin({ email, password })
     }
 
+    useEffect(() => {
+        if (error) {
+            setModalVisible(true);
+        }
+    }, [error]);
+
     return (
         <View style={AuthStyles.container}>
+            <ErrorModal
+                visible={modalVisible}
+                message={error || ''}
+                onClose={() => setModalVisible(false) }
+            />
             <View style={AuthStyles.container}>
                 <Text style={AuthStyles.title}>Login Account</Text>
                 <Text style={AuthStyles.description}>Welcome Back!</Text>
@@ -46,12 +61,21 @@ export function LoginForm() {
                     style={AuthStyles.button}
                     disabled={loading}
                 />
-
-                {error && <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>}
             </View>
-            <Text>
-                Don't have an account? <Text onPress={() => router.push('/register')} style={{ color: 'blue' }}>Register</Text>
-            </Text>
+            <View style={AuthStyles.lineContainer}>
+                <View style={AuthStyles.line}></View>
+                <Text style={AuthStyles.orText}>or logged in</Text>
+                <View style={AuthStyles.line}></View>
+            </View>
+            <View style={AuthStyles.changeContainer}>
+                <Text style={{ textAlign: 'center' }}>
+                    Don't have an account?
+                </Text>
+                <TouchableOpacity onPress={() => router.push('/register')}>
+                    {/* <GradientText text="Register" /> */}
+                    <Text style={AuthStyles.gradientText}>Register</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -60,15 +84,27 @@ export function RegisterForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const { performRegister, loading, error } = useRegister(); // Hook retorna a função performLogin
+    const [modalVisible, setModalVisible] = useState(false)
+    const { performRegister, loading, error } = useRegister();
     const router = useRouter()
 
-    const handleRegisyter = () => {
-        performRegister({name, email, password })
+    const handleRegister = () => {
+        performRegister({ name, email, password })
     }
+
+    useEffect(() => {
+        if (error) {
+            setModalVisible(true); 
+        }
+    }, [error]);
 
     return (
         <View style={AuthStyles.container}>
+             <ErrorModal
+                visible={modalVisible}
+                message={error || ''}
+                onClose={() => setModalVisible(false) }
+            />
             <View style={AuthStyles.container}>
                 <Text style={AuthStyles.title}>Create Account</Text>
                 <Text style={AuthStyles.description}>Sign up to continue!</Text>
@@ -100,16 +136,28 @@ export function RegisterForm() {
 
                 <ButtonComponent
                     title={loading ? "Carregando..." : "Register"}
-                    onPress={handleRegisyter}
+                    onPress={handleRegister}
                     style={AuthStyles.button}
                     disabled={loading}
                 />
-
-                {error && <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>}
             </View>
-            <Text>
-                Already have an account? <Text onPress={() => router.push('/(login)')} style={{ color: 'blue' }}>Login</Text>
-            </Text>
+            <View style={AuthStyles.lineContainer}>
+                <View style={AuthStyles.line}></View>
+                <Text style={AuthStyles.orText}>or sign in with</Text>
+                <View style={AuthStyles.line}></View>
+            </View>
+            <View>
+                {/* <ButtonComponent
+                title={loading ? "Carregando..." : "Sign in with Google"}
+                onPress={handleGoogle}
+                style={AuthStyles.button}
+                disabled={loading}></ButtonComponent> */}
+            </View>
+            <View style={AuthStyles.container}>
+                <Text style={{ textAlign: 'center' }}>
+                    Already have an account? <Text onPress={() => router.push('/(login)')}>Login</Text>
+                </Text>
+            </View>
         </View>
     );
 }

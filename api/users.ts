@@ -2,11 +2,19 @@ import { User } from '../types/user';
 export const url='http://192.168.1.164:3000/users';
 
 // Get User by Id
-export async function getUser(id:number){
+export async function getUser(id:string, token: string) {
   try {
-    console.log(`${url}/${id}`)
-    const response = await fetch(`${url}/${id}`);
+    console.log("ID:",id)
+    console.log("Token",token)
+    const response = await fetch(`${url}/${id}`,{
+        method:'GET',
+        headers:{
+            'Content-Type':'application/json',
+            'Authorization':`Bearer ${token}`
+        }
+    });
     const data = await response.json();
+    console.log("DATA:",data)
     const user=data.result
     return user
   } catch (error) {

@@ -1,13 +1,14 @@
 import { Stack } from "expo-router";
 
-export default function EventsLayout() {
+export default function TasksLayout() {
     return (
         <Stack>
             <Stack.Screen name="index" options={{
-                headerShown: false,
+                headerShown: false
             }} />
             <Stack.Screen name="[id]" options={{
-                headerShown: false,
+                title: 'Individual Task',
+                headerTitleAlign: 'center',
             }} />
         </Stack>
     );
